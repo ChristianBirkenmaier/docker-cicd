@@ -1,0 +1,19 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 5000:3000
+    volumes:
+      - /var/app/frontend/node_modules
+      - .:/var/app/frontend
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /var/app/frontend/node_modules
+      - .:/var/app/frontend
+    command: ["npm", "run", "test"]
